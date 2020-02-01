@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		01E8CC3523E51E590055C473 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CC3423E51E590055C473 /* AppDelegate.swift */; };
 		01E8CC3723E51E590055C473 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CC3623E51E590055C473 /* SceneDelegate.swift */; };
-		01E8CC3923E51E590055C473 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CC3823E51E590055C473 /* ViewController.swift */; };
 		01E8CC3C23E51E590055C473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CC3A23E51E590055C473 /* Main.storyboard */; };
 		01E8CC3E23E51E620055C473 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CC3D23E51E620055C473 /* Assets.xcassets */; };
 		01E8CC4123E51E620055C473 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CC3F23E51E620055C473 /* LaunchScreen.storyboard */; };
@@ -24,7 +23,6 @@
 		01E8CC3123E51E590055C473 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01E8CC3423E51E590055C473 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01E8CC3623E51E590055C473 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		01E8CC3823E51E590055C473 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		01E8CC3B23E51E590055C473 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01E8CC3D23E51E620055C473 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01E8CC4023E51E620055C473 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,7 +66,6 @@
 			children = (
 				01E8CC3423E51E590055C473 /* AppDelegate.swift */,
 				01E8CC3623E51E590055C473 /* SceneDelegate.swift */,
-				01E8CC3823E51E590055C473 /* ViewController.swift */,
 				01E8CC5223E5212E0055C473 /* LoginViewController.swift */,
 				01E8CC5423E521450055C473 /* HomeViewController.swift */,
 				01E8CC5823E521630055C473 /* PostViewController.swift */,
@@ -158,7 +155,6 @@
 				01E8CC5923E521630055C473 /* PostViewController.swift in Sources */,
 				01E8CC5B23E521710055C473 /* SettingViewController.swift in Sources */,
 				01E8CC5323E5212E0055C473 /* LoginViewController.swift in Sources */,
-				01E8CC3923E51E590055C473 /* ViewController.swift in Sources */,
 				01E8CC3523E51E590055C473 /* AppDelegate.swift in Sources */,
 				01E8CC3723E51E590055C473 /* SceneDelegate.swift in Sources */,
 			);
