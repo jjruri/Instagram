@@ -45,6 +45,9 @@
                                     <constraint firstAttribute="width" constant="300" id="kTF-nl-29J"/>
                                 </constraints>
                                 <state key="normal" title="ログイン" backgroundImage="btn"/>
+                                <connections>
+                                    <action selector="handleLoginButton:" destination="rBj-zq-xSG" eventType="touchUpInside" id="wbf-zb-4CD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y6F-Bq-Gal">
                                 <rect key="frame" x="57" y="306" width="300" height="40"/>
@@ -52,6 +55,9 @@
                                     <constraint firstAttribute="width" constant="300" id="7dZ-Ut-DWr"/>
                                 </constraints>
                                 <state key="normal" title="アカウント作成" backgroundImage="btn"/>
+                                <connections>
+                                    <action selector="handleCreatAccountButton:" destination="rBj-zq-xSG" eventType="touchUpInside" id="pR1-sA-eLL"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -69,6 +75,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5jp-O9-Pjl"/>
                     </view>
+                    <connections>
+                        <outlet property="displayNameTextField" destination="wR0-46-lJF" id="Oci-Lh-JMl"/>
+                        <outlet property="mailAddressTextField" destination="V6v-GP-9cH" id="fDm-Ai-d89"/>
+                        <outlet property="passwordTextField" destination="Ox4-Mt-FtR" id="WGv-c8-KW8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PWQ-dQ-c7K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
