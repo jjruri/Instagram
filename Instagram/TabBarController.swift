@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class TabBarController: UITabBarController,UITabBarControllerDelegate {
 
@@ -25,6 +26,19 @@ class TabBarController: UITabBarController,UITabBarControllerDelegate {
         }
         else{//投稿以外のタブがタップされた場合は普通に処理していいよ
             return true
+        }
+    }
+    
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //ログインしていないときの処理
+        if Auth.auth().currentUser == nil {
+            //LoginViewControllerを呼び出す
+            let loginViewController = self.storyboard!.instantiateViewController(withIdentifier: "Login")
+            present(loginViewController, animated: true, completion: nil)
         }
     }
 
