@@ -8,15 +8,50 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 
 class SettingViewController: UIViewController {
+    
+    @IBOutlet weak var displaynameTextField: UITextField!
+    
+    @IBAction func hadleChangeButton(_ sender: Any) {
+        let user = Auth.auth().currentUser!
+        let changeRequest = user.createProfileChangeRequest()
+        
+        if displaynameTextField.text == "" {
+            SVProgressHUD.showError(withStatus: "表示名は必須です。必ず入力してください")
+            SVProgressHUD.dismiss(withDelay: 1.5, completion: nil)
+        }
+        else{
+        changeRequest.displayName = displaynameTextField.text
+        changeRequest.commitChanges { error in
+            if let error = error {
+                print("DEBUG PRINT:" + error.localizedDescription)
+                SVProgressHUD.showError(withStatus: "表示名の登録に失敗しました。もう一度お試しください")
+                SVProgressHUD.dismiss(withDelay: 1.5, completion: nil)
+                return
+            }
+            //print("DEBUG PRINT: \(user.displayName!) の設定に成功しました。")
+            SVProgressHUD.showSuccess(withStatus: "表示名の変更が完了しました")
+            SVProgressHUD.dismiss(withDelay: 1.0, completion: nil)
+            self.dismiss(animated: true, completion: nil)
+        }
+        }
+    }
+    
     @IBAction func handleLogoutButton(_ sender: Any) {
         try! Auth.auth().signOut()
         let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Login")
         self.present(loginViewController!, animated: true, completion: nil)
         
         tabBarController?.selectedIndex = 0
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let user = Auth.auth().currentUser!
+        print("user情報:\(user)")
+        displaynameTextField.text = user.displayName
     }
     
     override func viewDidLoad() {
