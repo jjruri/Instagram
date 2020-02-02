@@ -53,7 +53,7 @@ class LoginViewController: UIViewController {
                     print("DEBUG PRINT: \(user.displayName!) の設定に成功しました。")
                     self.dismiss(animated: true, completion: nil)
                 }
-
+                
             }
         }
     }
