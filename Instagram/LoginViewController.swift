@@ -16,6 +16,30 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var displayNameTextField: UITextField!
     
     @IBAction func handleLoginButton(_ sender: Any) {
+        let address = mailAddressTextField.text!
+        let password = passwordTextField.text!
+        
+        // アドレスとパスワードと表示名のいずれかでも入力されていない時は何もしない
+        if address.isEmpty || password.isEmpty {
+            SVProgressHUD.showError(withStatus: "メールアドレスとパスワードを入力してください")
+            print("DEBUG_PRINT: 何かが空文字です。")
+            print("アドレスには\(address)が入ってる")
+            return
+        }
+        else{
+            SVProgressHUD.show()
+            Auth.auth().signIn(withEmail: address, password: password){ authResult, error in
+                if let error = error {
+                    print("DEBUG PRINT:" + error.localizedDescription)
+                    SVProgressHUD.showError(withStatus: "ログイン失敗　やり直して下さい")
+                    return
+                }
+                print("ログイン成功")
+                SVProgressHUD.dismiss()
+                
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     
     @IBAction func handleCreatAccountButton(_ sender: Any) {
@@ -27,7 +51,7 @@ class LoginViewController: UIViewController {
         
         // アドレスとパスワードと表示名のいずれかでも入力されていない時は何もしない
         if address.isEmpty || password.isEmpty || displayName.isEmpty {
-            SVProgressHUD.showError(withStatus: "必須項目を入力してください")
+            SVProgressHUD.showError(withStatus: "3項目全て入力してください")
             print("DEBUG_PRINT: 何かが空文字です。")
             print("アドレスには\(address)が入ってる")
             print("displaynameには\(displayName)が入ってる")
