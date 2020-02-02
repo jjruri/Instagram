@@ -17,6 +17,7 @@ class TabBarController: UITabBarController,UITabBarControllerDelegate {
         // Do any additional setup after loading the view.
         self.delegate = self
     }
+    
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         //投稿がタップされた時だけは画面切り替えじゃなくいモーダルで表示させる
         if viewController is ImageSelectViewController {
