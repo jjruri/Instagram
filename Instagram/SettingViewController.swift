@@ -42,8 +42,11 @@ class SettingViewController: UIViewController {
     
     @IBAction func handleLogoutButton(_ sender: Any) {
         try! Auth.auth().signOut()
+        SVProgressHUD.showSuccess(withStatus: "ログアウトしました")
         let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Login")
-        self.present(loginViewController!, animated: true, completion: nil)
+        SVProgressHUD.dismiss(withDelay: 1.0, completion: {self.present(loginViewController!, animated: true, completion: nil)})
+        //ログアウトしましたって出して1秒たってからログイン画面に戻したいので、completionに記載した
+        
         
         tabBarController?.selectedIndex = 0
     }
