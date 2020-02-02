@@ -32,11 +32,11 @@ class LoginViewController: UIViewController {
                 if let error = error {
                     print("DEBUG PRINT:" + error.localizedDescription)
                     SVProgressHUD.showError(withStatus: "ログイン失敗　やり直して下さい")
+                    SVProgressHUD.dismiss(withDelay: 1.5, completion: nil)
                     return
                 }
                 print("ログイン成功")
                 SVProgressHUD.dismiss()
-                
                 self.dismiss(animated: true, completion: nil)
             }
         }
@@ -52,6 +52,7 @@ class LoginViewController: UIViewController {
         // アドレスとパスワードと表示名のいずれかでも入力されていない時は何もしない
         if address.isEmpty || password.isEmpty || displayName.isEmpty {
             SVProgressHUD.showError(withStatus: "3項目全て入力してください")
+            SVProgressHUD.dismiss(withDelay: 1.5, completion: nil)
             print("DEBUG_PRINT: 何かが空文字です。")
             print("アドレスには\(address)が入ってる")
             print("displaynameには\(displayName)が入ってる")
@@ -65,6 +66,7 @@ class LoginViewController: UIViewController {
                 if let error = error {
                     print("DEBUG PRINT:" + error.localizedDescription)
                     SVProgressHUD.showError(withStatus: "新規登録失敗　再度お試しください")
+                    SVProgressHUD.dismiss(withDelay: 1.5, completion: nil)
                     return
                 }
                 //errorを吐かなかった場合はログを出してユーザー名の登録に移る
@@ -77,7 +79,8 @@ class LoginViewController: UIViewController {
                 changeRequest.commitChanges { error in
                     if let error = error {
                         print("DEBUG PRINT:" + error.localizedDescription)
-                        SVProgressHUD.showError(withStatus: "表示名の登録に失敗しました")
+                        SVProgressHUD.showError(withStatus: "表示名の登録に失敗しました。後から変更可能ですので、登録したメールアドレスとパスワードでログインしてください。")
+                        SVProgressHUD.dismiss(withDelay: 1.5, completion: nil)
                         return
                     }
                     print("DEBUG PRINT: \(user.displayName!) の設定に成功しました。")
