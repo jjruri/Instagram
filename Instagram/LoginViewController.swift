@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var mailAddressTextField: UITextField!
@@ -26,16 +27,20 @@ class LoginViewController: UIViewController {
         
         // アドレスとパスワードと表示名のいずれかでも入力されていない時は何もしない
         if address.isEmpty || password.isEmpty || displayName.isEmpty {
+            SVProgressHUD.showError(withStatus: "必須項目を入力してください")
             print("DEBUG_PRINT: 何かが空文字です。")
             print("アドレスには\(address)が入ってる")
             print("displaynameには\(displayName)が入ってる")
             return
         }
         else{//３カラムとも入力されている時の処理
+            //押下してから処理が完了するまでサーバー待ちなので、まずは処理中表示を出す
+            SVProgressHUD.show()
             Auth.auth().createUser(withEmail: address, password: password/*本来はここにcompletionがくるけど、この引数は長くなるので、一度カッコをきって別だしで{}で書くことが許されてるので外に書く */)
             { authResult , error in
                 if let error = error {
                     print("DEBUG PRINT:" + error.localizedDescription)
+                    SVProgressHUD.showError(withStatus: "新規登録失敗　再度お試しください")
                     return
                 }
                 //errorを吐かなかった場合はログを出してユーザー名の登録に移る
@@ -48,9 +53,11 @@ class LoginViewController: UIViewController {
                 changeRequest.commitChanges { error in
                     if let error = error {
                         print("DEBUG PRINT:" + error.localizedDescription)
+                        SVProgressHUD.showError(withStatus: "表示名の登録に失敗しました")
                         return
                     }
                     print("DEBUG PRINT: \(user.displayName!) の設定に成功しました。")
+                    SVProgressHUD.dismiss()
                     self.dismiss(animated: true, completion: nil)
                 }
                 
