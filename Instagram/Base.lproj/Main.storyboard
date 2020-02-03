@@ -108,7 +108,38 @@
                     <view key="view" contentMode="scaleToFill" id="D6b-37-SRZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSU-0j-rG6">
+                                <rect key="frame" x="57" y="124" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="by9-SY-TrD"/>
+                                </constraints>
+                                <state key="normal" title="ライブラリ" backgroundImage="btn"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xep-Fg-1cR">
+                                <rect key="frame" x="57" y="224" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="G5j-Ie-Uo9"/>
+                                </constraints>
+                                <state key="normal" title="キャンセル" backgroundImage="btn"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BtO-Pv-Fng">
+                                <rect key="frame" x="57" y="174" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="ZeC-aP-mKz"/>
+                                </constraints>
+                                <state key="normal" title="カメラ" backgroundImage="btn"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Xep-Fg-1cR" firstAttribute="top" secondItem="BtO-Pv-Fng" secondAttribute="bottom" constant="10" id="4f8-13-gvu"/>
+                            <constraint firstItem="Xep-Fg-1cR" firstAttribute="centerX" secondItem="D6b-37-SRZ" secondAttribute="centerX" id="Mi4-qt-LNS"/>
+                            <constraint firstItem="CSU-0j-rG6" firstAttribute="centerX" secondItem="D6b-37-SRZ" secondAttribute="centerX" id="T7e-r7-0ce"/>
+                            <constraint firstItem="BtO-Pv-Fng" firstAttribute="top" secondItem="CSU-0j-rG6" secondAttribute="bottom" constant="10" id="aAT-gj-Jd8"/>
+                            <constraint firstItem="CSU-0j-rG6" firstAttribute="top" secondItem="ELx-5e-Pfg" secondAttribute="top" constant="80" id="ew5-2Q-VqP"/>
+                            <constraint firstItem="BtO-Pv-Fng" firstAttribute="centerX" secondItem="D6b-37-SRZ" secondAttribute="centerX" id="oai-Ez-ePC"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ELx-5e-Pfg"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="投稿" image="camera" id="8Y1-vs-xOF"/>
@@ -149,7 +180,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJc-Ei-562">
-                                <rect key="frame" x="57" y="168" width="300" height="40"/>
+                                <rect key="frame" x="57" y="168" width="300" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Bq0-BQ-S34"/>
                                 </constraints>
@@ -159,7 +190,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LY0-GZ-iwK">
-                                <rect key="frame" x="57" y="218" width="300" height="40"/>
+                                <rect key="frame" x="57" y="258" width="300" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="x7x-9o-rRY"/>
                                 </constraints>
