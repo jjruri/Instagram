@@ -43,7 +43,7 @@ class ImageSelectViewController: UIViewController,UIImagePickerControllerDelegat
     }
     
     func imageEditor(_ editor: CLImageEditor!, didFinishEditingWith image: UIImage!) {
-        let postViewController = self.storyboard?.instantiateViewController(withIdentifier: "Post")
+        let postViewController = self.storyboard?.instantiateViewController(withIdentifier: "Post") as! PostViewController
         postViewController.image = image!
         editor.present(postViewController,animated: true,completion: nil)
     }
