@@ -46,8 +46,6 @@ class SettingViewController: UIViewController {
         let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Login")
         SVProgressHUD.dismiss(withDelay: 1.0, completion: {self.present(loginViewController!, animated: true, completion: nil)})
         //ログアウトしましたって出して1秒たってからログイン画面に戻したいので、completionに記載した
-        
-        
         tabBarController?.selectedIndex = 0
     }
     

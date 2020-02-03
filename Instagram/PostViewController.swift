@@ -23,19 +23,23 @@ class PostViewController: UIViewController {
         print("ポストレフは\(postRef)")
         let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postRef.documentID + ".jpg")
         
-        //画像のアップロードする準備
+        //画像をアップロードする
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
-        //画像をstorageに保存する
         imageRef.putData(imageData!, metadata: metadata){(metadata,error) in
             if let error = error {
                 print("エラー：\(error)")
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: nil)//エラーになったら投稿は保存に進まずに編集画面に戻す
             }
-        //投稿をfirestoreに保存する
+            
+        //画像が保存できたら投稿をfirestoreに保存する
             let name = Auth.auth().currentUser?.displayName
             let postDic = ["name":name!,"caption":self.textField.text!,"date":FieldValue.serverTimestamp()] as [String : Any]
             postRef.setData(postDic)
+           
+           //imageselect->pickercontroller->editor->postと全部モーダルで出してるので一気にとじないといけない。最初のモーダルを閉じればそのあとのも全部閉じるので、前の前のを繰り返してimageselectを閉じてみる
+            self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+            self.tabBarController?.selectedIndex = 0
         }
         
     }
