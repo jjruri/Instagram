@@ -8,8 +8,24 @@
 
 import UIKit
 
-class ImageSelectViewController: UIViewController {
-
+class ImageSelectViewController: UIViewController,UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+    
+    @IBAction func handleLibraryButton(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            let pickerController = UIImagePickerController()
+            pickerController.delegate = self
+            pickerController.sourceType = .photoLibrary
+            self.present(pickerController,animated: true,completion: nil)
+        }
+    }
+    
+    @IBAction func handleCameraButton(_ sender: Any) {
+    }
+    
+    @IBAction func handleCancelButton(_ sender: Any) {
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
