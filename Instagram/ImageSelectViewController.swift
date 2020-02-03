@@ -30,7 +30,7 @@ class ImageSelectViewController: UIViewController,UIImagePickerControllerDelegat
         }
     }
     
-    //ライブラリでもカメラでも画像
+    //ライブラリでもカメラでも画像が確定した時に呼んでるメソッド
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if info[.originalImage] != nil{
             let image = info[.originalImage] as! UIImage
@@ -40,6 +40,12 @@ class ImageSelectViewController: UIViewController,UIImagePickerControllerDelegat
             editor.delegate = self
             picker.present(editor, animated: true,completion: nil)
         }
+    }
+    
+    func imageEditor(_ editor: CLImageEditor!, didFinishEditingWith image: UIImage!) {
+        let postViewController = self.storyboard?.instantiateViewController(withIdentifier: "Post")
+        postViewController.image = image!
+        editor.present(postViewController,animated: true,completion: nil)
     }
     
     @IBAction func handleCancelButton(_ sender: Any) {
