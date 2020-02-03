@@ -28,6 +28,15 @@ class ImageSelectViewController: UIViewController,UIImagePickerControllerDelegat
         }
     }
     
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if info[.originalImage] != nil{
+            let image = info[.originalImage] as! UIImage
+            
+            print("DEBUG PRINT:image=\(image)")
+        }
+    }
+    
     @IBAction func handleCancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
