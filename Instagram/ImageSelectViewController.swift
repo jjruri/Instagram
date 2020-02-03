@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import CLImageEditor
 
-class ImageSelectViewController: UIViewController,UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+class ImageSelectViewController: UIViewController,UIImagePickerControllerDelegate , UINavigationControllerDelegate,CLImageEditorDelegate {
     
+    //ライブラリを起動させる
     @IBAction func handleLibraryButton(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             let pickerController = UIImagePickerController()
@@ -18,7 +20,7 @@ class ImageSelectViewController: UIViewController,UIImagePickerControllerDelegat
             self.present(pickerController,animated: true,completion: nil)
         }
     }
-    
+    //カメラを起動させる
     @IBAction func handleCameraButton(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             let pickerController = UIImagePickerController()
@@ -28,12 +30,15 @@ class ImageSelectViewController: UIViewController,UIImagePickerControllerDelegat
         }
     }
     
-    
+    //ライブラリでもカメラでも画像
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if info[.originalImage] != nil{
             let image = info[.originalImage] as! UIImage
             
             print("DEBUG PRINT:image=\(image)")
+            let editor = CLImageEditor(image : image)!
+            editor.delegate = self
+            picker.present(editor, animated: true,completion: nil)
         }
     }
     
