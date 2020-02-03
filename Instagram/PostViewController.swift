@@ -18,6 +18,7 @@ class PostViewController: UIViewController {
     }
     
     @IBAction func handleCancelButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
