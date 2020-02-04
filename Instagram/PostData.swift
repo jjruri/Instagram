@@ -10,19 +10,21 @@ import UIKit
 import Firebase
 
 class PostData: NSObject {
+    //このクラス内でfirestore にアクセスしようとすると、キャッシュを使えなくなって激重アプリになる？
+    //このクラスでは後で呼び出すための型宣言のみを記載しておく
     var id: String
     var name: String?
     var caption: String?
     var date: Date
-    var likes: [String] = []
-    var isLiked: Bool = false
+    //var likes: [String] = []
+    //var isLiked: Bool = false
     
     init(document: QueryDocumentSnapshot) {
         self.id = document.documentID
         
         let postDic = document.data()
-        self.name = postDic["name"] as! String
-        self.caption = postDic["caption"] as! String
+        self.name = postDic["name"] as? String
+        self.caption = postDic["caption"] as? String
         
         //firestoreのドキュメントに入ってるdateはtimestamoなので、日付だけ取るには一回変換させる必要がある
         let timeStamp = postDic["date"] as! Timestamp
