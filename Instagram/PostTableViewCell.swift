@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import FirebaseUI
 
 class PostTableViewCell: UITableViewCell {
+    
+    //PostDataでfirestoreからのデータを使える型に変換したのを元に、データが届いたときに表示できるように要素をつくるためのクラス
     
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
@@ -29,7 +32,28 @@ class PostTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        
+        //PostDataの値をセルに送り込むためのfuncをつくる
+        func setPostData(_ postData: PostData){
+            //firevbaseUIで使えるようになったsd_setImageというメソッドを使ってファイルパスから画像をダウンロードしてimageViewに突っ込むまでを一気にやってもらう
+            //画像処理
+            let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postData.id + ".jpg")
+            postImageView.sd_setImage(with: imageRef)
+            
+            //テキスト情報処理
+            self.captionLabel.text = "\(postData.name!)|\(postData.caption!)"
+            
+            //date処理
+            self.dateLabel.text = ""
+            if let date = postData.date {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy/MM/dd HH:mm"
+                let dateString = formatter.string(from: date)
+                self.dateLabel.text = dateString
+            }
+                
+            }
+            
+        }
+        
     }
-    
-    
-}
