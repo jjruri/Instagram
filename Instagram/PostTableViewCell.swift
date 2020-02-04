@@ -9,6 +9,16 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likeLabel: UILabel!
+    @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var commentLabel: UILabel!
+    
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

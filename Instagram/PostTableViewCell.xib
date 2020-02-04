@@ -87,6 +87,15 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="captionLabel" destination="xOQ-8E-Dsy" id="ePi-rF-iPj"/>
+                <outlet property="commentButton" destination="Yg2-zT-gfy" id="7I6-xA-XQG"/>
+                <outlet property="commentLabel" destination="Diz-qg-38Z" id="gVa-uV-qxC"/>
+                <outlet property="dateLabel" destination="4g1-iz-DJZ" id="Vfq-X7-fWA"/>
+                <outlet property="likeButton" destination="aiP-eP-QkV" id="XWO-L6-cPi"/>
+                <outlet property="likeLabel" destination="DE5-vl-WyJ" id="ruu-OE-fo7"/>
+                <outlet property="postImageView" destination="2An-Pk-z6i" id="Wam-0m-t8b"/>
+            </connections>
             <point key="canvasLocation" x="265.94202898550725" y="384.70982142857139"/>
         </tableViewCell>
     </objects>
