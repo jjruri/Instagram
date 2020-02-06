@@ -22,38 +22,37 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var commentLabel: UILabel!
     
     
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
         
-        //PostDataの値をセルに送り込むためのfuncをつくる
-        func setPostData(_ postData: PostData){
-            //firevbaseUIで使えるようになったsd_setImageというメソッドを使ってファイルパスから画像をダウンロードしてimageViewに突っ込むまでを一気にやってもらう
-            //画像処理
-            let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postData.id + ".jpg")
-            postImageView.sd_setImage(with: imageRef)
-            
-            //テキスト情報処理
-            self.captionLabel.text = "\(postData.name!)|\(postData.caption!)"
-            
-            //date処理
-            self.dateLabel.text = ""
-            if let date = postData.date {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy/MM/dd HH:mm"
-                let dateString = formatter.string(from: date)
-                self.dateLabel.text = dateString
-            }
-                
-            }
-            
+        // Configure the view for the selected state
+    }
+    //PostDataの値をセルに送り込むためのfunc
+    func setPostData(_ postData: PostData){
+        //firevbaseUIで使えるようになったsd_setImageというメソッドを使ってファイルパスから画像をダウンロードしてimageViewに突っ込むまでを一気にやってもらう
+        //画像処理
+        let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postData.id + ".jpg")
+        postImageView.sd_setImage(with: imageRef)
+        
+        //テキスト情報処理
+        self.captionLabel.text = "\(postData.name!)|\(postData.caption!)"
+        
+        //date処理
+        self.dateLabel.text = ""
+        if let date = postData.date {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd HH:mm"
+            let dateString = formatter.string(from: date)
+            self.dateLabel.text = dateString
         }
         
     }
+    
+    
+}
