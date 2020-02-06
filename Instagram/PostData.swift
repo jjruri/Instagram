@@ -27,8 +27,8 @@ class PostData: NSObject {
         self.caption = postDic["caption"] as? String
         
         //firestoreのドキュメントに入ってるdateはtimestamoなので、日付だけ取るには一回変換させる必要がある
-        let timeStamp = postDic["date"] as! Timestamp
-        self.date = timeStamp.dateValue()
+        let timestamp = postDic["date"] as? Timestamp
+        self.date = timestamp?.dateValue()
     }
 
 }

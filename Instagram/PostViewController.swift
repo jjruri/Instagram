@@ -35,6 +35,7 @@ class PostViewController: UIViewController {
         //画像が保存できたら投稿をfirestoreに保存する
             let name = Auth.auth().currentUser?.displayName
             let postDic = ["name":name!,"caption":self.textField.text!,"date":FieldValue.serverTimestamp()] as [String : Any]
+            print("postDicの中身：\(postDic)")
             postRef.setData(postDic)
            
            //imageselect->pickercontroller->editor->postと全部モーダルで出してるので一気にとじないといけない。最初のモーダルを閉じればそのあとのも全部閉じるので、前の前のを繰り返してimageselectを閉じてみる

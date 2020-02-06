@@ -53,13 +53,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="displayname/caption" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOQ-8E-Dsy">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="displayname/caption" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOQ-8E-Dsy">
                         <rect key="frame" x="30" y="534" width="433" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="displayname/comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Diz-qg-38Z">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="displayname/comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Diz-qg-38Z">
                         <rect key="frame" x="30" y="564.5" width="433" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -81,6 +81,7 @@
                     <constraint firstItem="Yg2-zT-gfy" firstAttribute="centerY" secondItem="aiP-eP-QkV" secondAttribute="centerY" id="e1I-zp-ZWW"/>
                     <constraint firstAttribute="trailingMargin" secondItem="xOQ-8E-Dsy" secondAttribute="trailing" constant="10" id="eaK-kD-QaD"/>
                     <constraint firstItem="Diz-qg-38Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="scU-Vg-JX5"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Diz-qg-38Z" secondAttribute="bottom" constant="10" id="tMv-r8-Ua4"/>
                     <constraint firstItem="xOQ-8E-Dsy" firstAttribute="top" secondItem="aiP-eP-QkV" secondAttribute="bottom" constant="10" id="uc8-hh-lEs"/>
                     <constraint firstItem="DE5-vl-WyJ" firstAttribute="centerY" secondItem="aiP-eP-QkV" secondAttribute="centerY" id="udw-Td-sgJ"/>
                     <constraint firstItem="2An-Pk-z6i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ysL-6A-Ra6"/>
