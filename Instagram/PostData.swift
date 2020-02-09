@@ -16,19 +16,36 @@ class PostData: NSObject {
     var name: String?
     var caption: String?
     var date: Date?
-    //var likes: [String] = []
-    //var isLiked: Bool = false
+    var likes: [String] = []
+    var isLiked: Bool = false
     
     init(document: QueryDocumentSnapshot) {
+        //ここでidはSnapShotのIDを使う
         self.id = document.documentID
         
+        //postDicという箱にsnapshotのデータを全部入れる
         let postDic = document.data()
+        
+        //とってきたデータを項目ごとに最初に宣言したnameやcaptionに入れる
         self.name = postDic["name"] as? String
         self.caption = postDic["caption"] as? String
         
-        //firestoreのドキュメントに入ってるdateはtimestamoなので、日付だけ取るには一回変換させる必要がある
+    //firestoreのドキュメントに入ってるdateはtimestamoなので、日付だけ取るには一回変換させる必要がある
         let timestamp = postDic["date"] as? Timestamp
         self.date = timestamp?.dateValue()
+        
+        //likeのUID配列をとってくる オプショナルにするだけだとnilでエラー出ちゃう
+        if let likes = postDic["likes"] as? [String]{
+        self.likes = likes
+        }
+        //likeされてるかどうかを判定して返してあげる処理
+        let myid = Auth.auth().currentUser!.uid
+        if self.likes.firstIndex(of: myid) != nil {
+            self.isLiked = true
+        }
+        else {
+            self.isLiked = false
+        }
     }
 
 }

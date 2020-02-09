@@ -38,14 +38,14 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             if let error = error {
                 print("DEBIG PRINT:投稿読み込みエラー\(error)")
             }
-           self.postArray = querySnapshot!.documents.map { document in
-                print("DEBUG PRINT:document取得 \(document)")
-                print("DEBUG PRINT:件数取得 \(self.postArray.count)")
-            print("postArrayの中身:\(self.postArray)")
-                    print("postRef:\(postRef)")
-                let postData = PostData(document: document)
-                return postData
+                
+            else{
+                self.postArray = querySnapshot!.documents.map { document in
+                    let postData = PostData(document: document)
+                    return postData
+                }
             }
+            print("DEBUG PRINT:件数取得 \(self.postArray.count)")
             self.tableView.reloadData()
         }
     }
@@ -59,9 +59,44 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell//ここでクラスを書き換えないとPostTableViewCell側で作った各要素の表示のためにデータをはめていくメソッドをたたけない
         cell.setPostData(postArray[indexPath.row])//ここで1セットずつメソッドにpostdataの値を渡してか、cellに入れるデータを返してもらう
+        
+        //
+        cell.likeButton.addTarget(self, action: #selector(handleButton(_:forEvent:)), for: .touchUpInside)
         return cell
     }
     
+    @objc func handleButton (_ sender:UIButton, forEvent event:UIEvent){
+        print("DEBUG PRINT:イイネボタンがタップされた")
+        
+        let touch = event.allTouches?.first
+        let point = touch!.location(in: self.tableView)
+        let indexPath = tableView.indexPathForRow(at: point)
+        let postData = postArray[indexPath!.row]
+        
+        //書き込むUIDが必要なので取得しておく
+        if let myid = Auth.auth().currentUser{
+            print("myid:\(String(describing: myid))")
+            //firestoreに書き込むのはいいねする時も外す時も同一処理にしたいので
+            //変更内容を入れる箱をつくる
+            let updateDetail: FieldValue
+            
+            if postData.isLiked == true{
+                print("リムーブします")
+                updateDetail = FieldValue.arrayRemove([myid])
+                
+            }
+            else{
+                print("追加します")
+                updateDetail = FieldValue.arrayUnion([myid])
+            }
+            
+            //箱に入れた変更内容をfirestoreに送る(likesをupdateDetailの内容でアップデートする
+            print("更新処理に入ります")
+            let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
+            print("postRef:\(postRef)")
+            postRef.updateData(["likes": updateDetail ])
+        }
+    }
     /*
      // MARK: - Navigation
      

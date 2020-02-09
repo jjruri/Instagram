@@ -52,6 +52,19 @@ class PostTableViewCell: UITableViewCell {
             self.dateLabel.text = dateString
         }
         
+        //いいねマークの処理
+        if postData.isLiked == true {
+            let buttonImage = UIImage(named: "like_exist")
+            self.likeButton.setImage(buttonImage, for: .normal)
+        }
+        else{
+            let buttonImage = UIImage(named: "like_none")
+            self.likeButton.setImage(buttonImage, for: .normal)
+        }
+        
+        //いいね数の表示
+        let likecount = postData.likes.count
+        self.likeLabel.text = "\(likecount)"
     }
     
     
