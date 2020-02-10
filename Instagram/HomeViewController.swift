@@ -58,7 +58,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell//ここでクラスを書き換えないとPostTableViewCell側で作った各要素の表示のためにデータをはめていくメソッドをたたけない
-        cell.setPostData(postArray[indexPath.row])//ここで1セットずつメソッドにpostdataの値を渡してか、cellに入れるデータを返してもらう
+        cell.setPostData(postArray[indexPath.row])//ここで1セットずつメソッドにpostdataの値を渡して、cellに入れるデータを返してもらう
         
         //
         cell.likeButton.addTarget(self, action: #selector(handleButton(_:forEvent:)), for: .touchUpInside)
@@ -78,23 +78,26 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             print("myid:\(String(describing: myid))")
             //firestoreに書き込むのはいいねする時も外す時も同一処理にしたいので
             //変更内容を入れる箱をつくる
-            let updateDetail: FieldValue
+            var updateDetail: FieldValue
+
             
-            if postData.isLiked == true{
+            if postData.isLiked {
                 print("リムーブします")
                 updateDetail = FieldValue.arrayRemove([myid])
-                
             }
             else{
                 print("追加します")
                 updateDetail = FieldValue.arrayUnion([myid])
+                print("updateDetail:\(updateDetail)")
+                //postRef.setData(["likes": updateDetail ])
             }
             
             //箱に入れた変更内容をfirestoreに送る(likesをupdateDetailの内容でアップデートする
-            print("更新処理に入ります")
             let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
+            
             print("postRef:\(postRef)")
-            postRef.updateData(["likes": updateDetail ])
+            print("likes:\(postData.likes)")
+            postRef.updateData(["likes": updateDetail])
         }
     }
     /*

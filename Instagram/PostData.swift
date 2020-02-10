@@ -18,6 +18,7 @@ class PostData: NSObject {
     var date: Date?
     var likes: [String] = []
     var isLiked: Bool = false
+
     
     init(document: QueryDocumentSnapshot) {
         //ここでidはSnapShotのIDを使う
