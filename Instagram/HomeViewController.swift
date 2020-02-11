@@ -62,8 +62,12 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         
         //
         cell.likeButton.addTarget(self, action: #selector(handleButton(_:forEvent:)), for: .touchUpInside)
+        
+        cell.commentButton.addTarget(self, action: #selector(commentButton(_:event:)), for: .touchUpInside)
+        
         return cell
     }
+    
     
     @objc func handleButton (_ sender:UIButton, forEvent event:UIEvent){
         print("DEBUG PRINT:イイネボタンがタップされた")
@@ -100,40 +104,25 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             print("postid:\(postData.id)")
             postRef.updateData(["likes": updateValue])
         }
-        
-        /*
-         print("DEBUG_PRINT: likeボタンがタップされました。")
-
-         // タップされたセルのインデックスを求める
-         let touch = event.allTouches?.first
-         let point = touch!.location(in: self.tableView)
-         let indexPath = tableView.indexPathForRow(at: point)
-
-         // 配列からタップされたインデックスのデータを取り出す
-         let postData = postArray[indexPath!.row]
-
-         // likesを更新する
-         if let myid = Auth.auth().currentUser?.uid {
-             // 更新データを作成する
-             var updateValue: FieldValue
-             if postData.isLiked {
-                 // すでにいいねをしている場合は、いいね解除のためmyidを取り除く更新データを作成
-                 updateValue = FieldValue.arrayRemove([myid])
-             } else {
-                 // 今回新たにいいねを押した場合は、myidを追加する更新データを作成
-                 updateValue = FieldValue.arrayUnion([myid])
-             }
-             // likesに更新データを書き込む
-             let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
-             postRef.updateData(["likes": updateValue])
-         }
-         */
-         
-        
-        
-        
-        
     }
+    
+   
+    @objc func commentButton(_ sender:UIButton, event:UIEvent){
+        print("コメントボタンがタップされたよ")
+        let touch = event.allTouches?.first
+        let point = touch!.location(in: self.tableView)
+        let indexPath = tableView.indexPathForRow(at: point)
+        let postData = postArray[indexPath!.row]
+        let postcaption = postData.caption
+        self.performSegue(withIdentifier: "comment", sender: nil)
+    }
+    
+    /*
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let commentView : commentViewController = segue.destination as! commentViewController
+        commentView.nameCaption = sender as! []
+    }
+ */
     /*
      // MARK: - Navigation
      

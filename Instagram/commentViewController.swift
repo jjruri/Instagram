@@ -10,11 +10,22 @@ import UIKit
 
 class commentViewController: UIViewController {
 
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var idCaption: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    var nameCaption:String! = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        idCaption.text = nameCaption
 
         // Do any additional setup after loading the view.
     }
+    
+
+    
+    
     
 
     /*
