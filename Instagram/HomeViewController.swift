@@ -74,21 +74,21 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let postData = postArray[indexPath!.row]
         
         //書き込むUIDが必要なので取得しておく
-        if let myid = Auth.auth().currentUser{
+        if let myid = Auth.auth().currentUser?.uid {
             print("myid:\(String(describing: myid))")
             //firestoreに書き込むのはいいねする時も外す時も同一処理にしたいので
             //変更内容を入れる箱をつくる
-            var updateDetail: FieldValue
+            var updateValue: FieldValue
 
             
             if postData.isLiked {
                 print("リムーブします")
-                updateDetail = FieldValue.arrayRemove([myid])
+                updateValue = FieldValue.arrayRemove([myid])
             }
             else{
                 print("追加します")
-                updateDetail = FieldValue.arrayUnion([myid])
-                print("updateDetail:\(updateDetail)")
+                updateValue = FieldValue.arrayUnion([myid])
+                print("updateDetail:\(updateValue)")
                 //postRef.setData(["likes": updateDetail ])
             }
             
@@ -97,8 +97,42 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             
             print("postRef:\(postRef)")
             print("likes:\(postData.likes)")
-            postRef.updateData(["likes": updateDetail])
+            print("postid:\(postData.id)")
+            postRef.updateData(["likes": updateValue])
         }
+        
+        /*
+         print("DEBUG_PRINT: likeボタンがタップされました。")
+
+         // タップされたセルのインデックスを求める
+         let touch = event.allTouches?.first
+         let point = touch!.location(in: self.tableView)
+         let indexPath = tableView.indexPathForRow(at: point)
+
+         // 配列からタップされたインデックスのデータを取り出す
+         let postData = postArray[indexPath!.row]
+
+         // likesを更新する
+         if let myid = Auth.auth().currentUser?.uid {
+             // 更新データを作成する
+             var updateValue: FieldValue
+             if postData.isLiked {
+                 // すでにいいねをしている場合は、いいね解除のためmyidを取り除く更新データを作成
+                 updateValue = FieldValue.arrayRemove([myid])
+             } else {
+                 // 今回新たにいいねを押した場合は、myidを追加する更新データを作成
+                 updateValue = FieldValue.arrayUnion([myid])
+             }
+             // likesに更新データを書き込む
+             let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
+             postRef.updateData(["likes": updateValue])
+         }
+         */
+         
+        
+        
+        
+        
     }
     /*
      // MARK: - Navigation

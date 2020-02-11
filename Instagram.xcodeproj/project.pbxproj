@@ -11,6 +11,7 @@
 		0175D54B23E9539A00B463A0 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0175D54923E9539A00B463A0 /* PostTableViewCell.swift */; };
 		0175D54C23E9539A00B463A0 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175D54A23E9539A00B463A0 /* PostTableViewCell.xib */; };
 		0175D54E23E9A18C00B463A0 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0175D54D23E9A18C00B463A0 /* PostData.swift */; };
+		017BA50023F236AC00FA1AA1 /* commentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017BA4FF23F236AC00FA1AA1 /* commentViewController.swift */; };
 		01E8CC3523E51E590055C473 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CC3423E51E590055C473 /* AppDelegate.swift */; };
 		01E8CC3723E51E590055C473 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CC3623E51E590055C473 /* SceneDelegate.swift */; };
 		01E8CC3C23E51E590055C473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CC3A23E51E590055C473 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 		0175D54923E9539A00B463A0 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		0175D54A23E9539A00B463A0 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		0175D54D23E9A18C00B463A0 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
+		017BA4FF23F236AC00FA1AA1 /* commentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commentViewController.swift; sourceTree = "<group>"; };
 		01E8CC3123E51E590055C473 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01E8CC3423E51E590055C473 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01E8CC3623E51E590055C473 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				0175D54723E7CB7100B463A0 /* const.swift */,
 				0175D54D23E9A18C00B463A0 /* PostData.swift */,
 				01E8CC5223E5212E0055C473 /* LoginViewController.swift */,
+				017BA4FF23F236AC00FA1AA1 /* commentViewController.swift */,
 				01E8CC5423E521450055C473 /* HomeViewController.swift */,
 				01E8CC5823E521630055C473 /* PostViewController.swift */,
 				0175D54923E9539A00B463A0 /* PostTableViewCell.swift */,
@@ -242,6 +245,7 @@
 				01E8CC5D23E528F10055C473 /* TabBarController.swift in Sources */,
 				01E8CC5523E521450055C473 /* HomeViewController.swift in Sources */,
 				01E8CC5923E521630055C473 /* PostViewController.swift in Sources */,
+				017BA50023F236AC00FA1AA1 /* commentViewController.swift in Sources */,
 				01E8CC5B23E521710055C473 /* SettingViewController.swift in Sources */,
 				01E8CC5323E5212E0055C473 /* LoginViewController.swift in Sources */,
 				0175D54823E7CB7100B463A0 /* const.swift in Sources */,
