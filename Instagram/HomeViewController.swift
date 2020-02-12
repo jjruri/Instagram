@@ -113,10 +113,19 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let point = touch!.location(in: self.tableView)
         let indexPath = tableView.indexPathForRow(at: point)
         let postData = postArray[indexPath!.row]
-        let postcaption = postData.caption
-        self.performSegue(withIdentifier: "comment", sender: nil)
+        /*let postInfo = [ "id":postData.id,"name":postData.name!, "date":postData.date!,"caption":postData.caption! ] as [String : Any]
+        print("postInfo:\(postInfo)")
+ */
+        let postId = postData.id
+        self.performSegue(withIdentifier: "comment", sender: postId )
+        print("sender:\(sender)")
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let commentViewcontroller:commentViewController = segue.destination as! commentViewController
+        commentViewcontroller.id = sender as! String
+    }
     /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let commentView : commentViewController = segue.destination as! commentViewController
