@@ -19,8 +19,8 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
     @IBOutlet weak var commentTextField: UITextField!
     
     
-     var listener: ListenerRegistration!
-     
+    var listener: ListenerRegistration!
+    //var postInfo: [PostData]=[]
     var postId:String! = ""
     var postName:String! = ""
     var caption:String! = ""
@@ -46,31 +46,7 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let postRef = Firestore.firestore().collection(Const.PostPath).document(self.postId)
-        print("postRef:\(postRef)")
-        /*
-        postRef.getDocument(){(document,error) in
-            if error != nil{
-                print("error")
-            }
-            else{
-                print("document:\(String(describing: document))")
-                
-                 let data = document?.data().map(String.init(describing: ))
-                 print("name:\(data!)")
-                 print("data:\(String(describing: data!))")
-                 /*self.name = data?["name"]
-                 print("name:\(name)")
-                 */
-                 self.postArray = document?.data().map{document in
-                 let postData = PostData(document: document)//これのためにdataはpostdata型にしておく必要がある
-                 } ??
-                 return postData
-                 }
-                 
-            }
-        */
-        
+        //コメントテーブルの読み込み
         let commentRef = Firestore.firestore().collection(Const.CommentPath)
         print("commentRef:\(commentRef)")
         
@@ -85,14 +61,38 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
                     print("commentData:\(commentData)")
                     return commentData
                 }
-            print("commentArray.count= \(self.commentArray.count)")
-            self.tableView.reloadData()
+                print("commentArray.count= \(self.commentArray.count)")
+                self.tableView.reloadData()
+            }
+        }
+        
+        //上部のポストの内容表示
+        let postRef = Firestore.firestore().collection(Const.PostPath).document(self.postId)
+        print("postRef:\(postRef)")
+        
+        postRef.getDocument { ( document , error ) in
+            if error != nil {
+                print("poseRef読み込みエラー")
+            }
+            else{
+                print("elseに入ったよ")
+                
+                print("document:\(document)")
+                self.idCaption.text = "\(document?["name"] as! String)|\(document?["caption"] as! String)"
+                print("date:\(document?["date"])")
+                
+                var timestamp = document?["date"] as! Timestamp
+                let date = timestamp.dateValue
+                
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy/MM/dd HH:mm"
+                let dateString = formatter.string(from: date())
+                self.dateLabel.text = dateString
             }
         }
         
         
-        }
-    //ここでviewWillAppear終了
+    }//ここでviewWillAppear終了
     
     
     
