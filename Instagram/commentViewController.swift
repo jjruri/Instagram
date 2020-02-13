@@ -92,6 +92,9 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
         }
         
         
+        //コメント者の名前を表示
+        self.nameLabel.text = Auth.auth().currentUser?.displayName
+        
     }//ここでviewWillAppear終了
     
     
@@ -110,7 +113,7 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
         
         cell.setCommentViewCell(commentArray[indexPath.row])
         
-        return cell
+            return cell
     }
     
     
