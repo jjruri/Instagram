@@ -12,6 +12,9 @@
 		0175D54C23E9539A00B463A0 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175D54A23E9539A00B463A0 /* PostTableViewCell.xib */; };
 		0175D54E23E9A18C00B463A0 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0175D54D23E9A18C00B463A0 /* PostData.swift */; };
 		017BA50023F236AC00FA1AA1 /* commentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017BA4FF23F236AC00FA1AA1 /* commentViewController.swift */; };
+		017BA50323F431D200FA1AA1 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017BA50123F431D200FA1AA1 /* CommentTableViewCell.swift */; };
+		017BA50423F431D200FA1AA1 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017BA50223F431D200FA1AA1 /* CommentTableViewCell.xib */; };
+		017BA50623F4D78700FA1AA1 /* CommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017BA50523F4D78700FA1AA1 /* CommentData.swift */; };
 		01E8CC3523E51E590055C473 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CC3423E51E590055C473 /* AppDelegate.swift */; };
 		01E8CC3723E51E590055C473 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CC3623E51E590055C473 /* SceneDelegate.swift */; };
 		01E8CC3C23E51E590055C473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CC3A23E51E590055C473 /* Main.storyboard */; };
@@ -33,6 +36,9 @@
 		0175D54A23E9539A00B463A0 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		0175D54D23E9A18C00B463A0 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		017BA4FF23F236AC00FA1AA1 /* commentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commentViewController.swift; sourceTree = "<group>"; };
+		017BA50123F431D200FA1AA1 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		017BA50223F431D200FA1AA1 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
+		017BA50523F4D78700FA1AA1 /* CommentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentData.swift; sourceTree = "<group>"; };
 		01E8CC3123E51E590055C473 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01E8CC3423E51E590055C473 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01E8CC3623E51E590055C473 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,9 +95,12 @@
 				01E8CC3623E51E590055C473 /* SceneDelegate.swift */,
 				0175D54723E7CB7100B463A0 /* const.swift */,
 				0175D54D23E9A18C00B463A0 /* PostData.swift */,
+				017BA50523F4D78700FA1AA1 /* CommentData.swift */,
 				01E8CC5223E5212E0055C473 /* LoginViewController.swift */,
 				017BA4FF23F236AC00FA1AA1 /* commentViewController.swift */,
 				01E8CC5423E521450055C473 /* HomeViewController.swift */,
+				017BA50123F431D200FA1AA1 /* CommentTableViewCell.swift */,
+				017BA50223F431D200FA1AA1 /* CommentTableViewCell.xib */,
 				01E8CC5823E521630055C473 /* PostViewController.swift */,
 				0175D54923E9539A00B463A0 /* PostTableViewCell.swift */,
 				0175D54A23E9539A00B463A0 /* PostTableViewCell.xib */,
@@ -185,6 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01E8CC4123E51E620055C473 /* LaunchScreen.storyboard in Resources */,
+				017BA50423F431D200FA1AA1 /* CommentTableViewCell.xib in Resources */,
 				0175D54C23E9539A00B463A0 /* PostTableViewCell.xib in Resources */,
 				01E8CC5F23E533B00055C473 /* GoogleService-Info.plist in Resources */,
 				01E8CC3E23E51E620055C473 /* Assets.xcassets in Resources */,
@@ -249,6 +259,8 @@
 				01E8CC5B23E521710055C473 /* SettingViewController.swift in Sources */,
 				01E8CC5323E5212E0055C473 /* LoginViewController.swift in Sources */,
 				0175D54823E7CB7100B463A0 /* const.swift in Sources */,
+				017BA50323F431D200FA1AA1 /* CommentTableViewCell.swift in Sources */,
+				017BA50623F4D78700FA1AA1 /* CommentData.swift in Sources */,
 				0175D54B23E9539A00B463A0 /* PostTableViewCell.swift in Sources */,
 				01E8CC3523E51E590055C473 /* AppDelegate.swift in Sources */,
 				0175D54E23E9A18C00B463A0 /* PostData.swift in Sources */,

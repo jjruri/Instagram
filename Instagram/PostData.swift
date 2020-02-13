@@ -10,8 +10,8 @@ import UIKit
 import Firebase
 
 class PostData: NSObject {
-    //このクラス内でfirestore にアクセスしようとすると、キャッシュを使えなくなって激重アプリになる？
-    //このクラスでは後で呼び出すための型宣言のみを記載しておく
+ //firestoreからの形をswiftで扱える形に直すのがこのクラス
+    //firestoreからとってきたdocumentをこのクラスに入れたら、データを使える形にしてこのクラス自体が返ってくる
     var id: String
     var name: String?
     var caption: String?

@@ -114,7 +114,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let indexPath = tableView.indexPathForRow(at: point)
         let postData = postArray[indexPath!.row]
         /*let postInfo = [ "id":postData.id,"name":postData.name!, "date":postData.date!,"caption":postData.caption! ] as [String : Any]
-        print("postInfo:\(postInfo)")
+        print("postInfo:\(postInfo)") センダーで配列は扱えないポストデータの状態で送ればいいのでは？
  */
         let postId = postData.id
         self.performSegue(withIdentifier: "comment", sender: postId )
@@ -124,7 +124,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let commentViewcontroller:commentViewController = segue.destination as! commentViewController
-        commentViewcontroller.id = sender as! String
+        commentViewcontroller.postId = sender as? String
     }
     /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
