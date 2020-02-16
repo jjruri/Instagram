@@ -13,6 +13,7 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var commentText: UILabel!
     @IBOutlet weak var commentDate: UILabel!
     
+    var postID:String = ""
     
     
     override func awakeFromNib() {
@@ -30,6 +31,7 @@ class CommentTableViewCell: UITableViewCell {
     func setCommentViewCell(_ commentData: CommentData){
         self.commentName.text = commentData.commentName
         self.commentText.text = commentData.commentText
+        self.postID = commentData.postID
         
         if let date = commentData.commentDate {
             let formatter = DateFormatter()

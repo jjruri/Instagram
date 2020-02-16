@@ -15,7 +15,8 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     var postArray:[PostData] = []
     var listener: ListenerRegistration!
-    
+    var commentArray:[CommentData] = []
+    var commentListener: ListenerRegistration!
     
     
     override func viewDidLoad() {
@@ -32,22 +33,59 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("listener:\(listener)")
         
-        let postRef = Firestore.firestore().collection(Const.PostPath).order(by: "date", descending: true)
-        listener = postRef.addSnapshotListener(){(querySnapshot,error) in
-            if let error = error {
-                print("DEBIG PRINT:投稿読み込みエラー\(error)")
-            }
-                
-            else{
-                self.postArray = querySnapshot!.documents.map { document in
-                    let postData = PostData(document: document)
-                    return postData
+        if Auth.auth().currentUser != nil{
+            if listener == nil{
+                //投稿一覧を取得
+                let postRef = Firestore.firestore().collection(Const.PostPath).order(by: "date", descending: true)
+                listener = postRef.addSnapshotListener(){(querySnapshot,error) in
+                    if let error = error {
+                        print("DEBIG PRINT:投稿読み込みエラー\(error)")
+                    }
+                    else{
+                        self.postArray = querySnapshot!.documents.map { document in
+                            let postData = PostData(document: document)
+                            return postData
+                        }
+                    }
+                    print("DEBUG PRINT:件数取得 \(self.postArray.count)")
+                    self.tableView.reloadData()
                 }
+                
             }
-            print("DEBUG PRINT:件数取得 \(self.postArray.count)")
-            self.tableView.reloadData()
+            
         }
+        else{
+            if listener != nil{
+                // listener登録済みなら削除してpostArrayをクリアする
+                //リスナーがないなら別に通信発生しない
+                listener.remove()
+                listener = nil
+                postArray = []
+                self.tableView.reloadData()
+            }
+        }
+        
+        /*
+         //投稿一覧に表示するために、コメントを一旦全件とってくる（あとでpostID指定する）
+         let commentRef = Firestore.firestore().collectionGroup("comments")
+         commentListener = commentRef.addSnapshotListener(){(commentQuerySnapshot,error) in
+         if let error = error {
+         print("DEBIG PRINT:コメント読み込みエラー\(error)")
+         }
+         else{
+         print("コメント読み込み開始")
+         self.commentArray = commentQuerySnapshot!.documents.map { commentDocument in
+         let commentData = CommentData(commentDocument: commentDocument)
+         print("commentData-potID:\(String(describing: commentData.postID))")
+         return commentData
+         }
+         }
+         //print("DEBUG PRINT:件数取得 \(self.commentData.count)")
+         self.tableView.reloadData()
+         }
+         */
     }
     
     
@@ -57,8 +95,18 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell//ここでクラスを書き換えないとPostTableViewCell側で作った各要素の表示のためにデータをはめていくメソッドをたたけない
-        cell.setPostData(postArray[indexPath.row])//ここで1セットずつメソッドにpostdataの値を渡して、cellに入れるデータを返してもらう
+        cell.setPostData(postArray[indexPath.row])
+        
+        
+        
+        //var postIndex = postArray[indexPath.row].id
+        
+        //let commentNum:Int! = commentArray.index(of: "postIndex")
+        //cell.setCommentData(commentArray[commentNum])
+        //ここで1セットずつメソッドにpostdataの値を渡して、cellに入れるデータを返してもらう
         
         //
         cell.likeButton.addTarget(self, action: #selector(handleButton(_:forEvent:)), for: .touchUpInside)
@@ -83,7 +131,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             //firestoreに書き込むのはいいねする時も外す時も同一処理にしたいので
             //変更内容を入れる箱をつくる
             var updateValue: FieldValue
-
+            
             
             if postData.isLiked {
                 print("リムーブします")
@@ -106,7 +154,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         }
     }
     
-   
+    
     @objc func commentButton(_ sender:UIButton, event:UIEvent){
         print("コメントボタンがタップされたよ")
         let touch = event.allTouches?.first
@@ -114,8 +162,8 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let indexPath = tableView.indexPathForRow(at: point)
         let postData = postArray[indexPath!.row]
         /*let postInfo = [ "id":postData.id,"name":postData.name!, "date":postData.date!,"caption":postData.caption! ] as [String : Any]
-        print("postInfo:\(postInfo)") センダーで配列は扱えないポストデータの状態で送ればいいのでは？
- */
+         print("postInfo:\(postInfo)") センダーで配列は扱えないポストデータの状態で送ればいいのでは？
+         */
         let postId = postData.id
         self.performSegue(withIdentifier: "comment", sender: postId )
         print("sender:\(sender)")
@@ -127,11 +175,11 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         commentViewcontroller.postId = sender as? String
     }
     /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let commentView : commentViewController = segue.destination as! commentViewController
-        commentView.nameCaption = sender as! []
-    }
- */
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     let commentView : commentViewController = segue.destination as! commentViewController
+     commentView.nameCaption = sender as! []
+     }
+     */
     /*
      // MARK: - Navigation
      

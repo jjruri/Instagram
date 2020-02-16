@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseUI
 
 class commentViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
@@ -46,8 +47,10 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
+ /*以下はコメントをサブコレクションで実装した場合のコードで今回は使わない
+         けどオリジナルアプリで参考になりそうなので残しておく
         //コメントテーブルの読み込み
-        let commentRef = Firestore.firestore().collection(Const.CommentPath)
+        let commentRef = Firestore.firestore().collection(Const.PostPath).document(postId).collection(Const.CommentPath)
         print("commentRef:\(commentRef)")
         
         listener = commentRef.whereField("postID", isEqualTo: postId).order(by: "date", descending: true).addSnapshotListener(){(commentSnapshot,error) in
@@ -65,6 +68,11 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
                 self.tableView.reloadData()
             }
         }
+        */
+        
+        //上部のポストの画像表示
+        let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postId + ".jpg")
+        imageView.sd_setImage(with: imageRef)
         
         //上部のポストの内容表示
         let postRef = Firestore.firestore().collection(Const.PostPath).document(self.postId)
@@ -93,7 +101,7 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
         
         
         //コメント者の名前を表示
-        self.nameLabel.text = Auth.auth().currentUser?.displayName
+        self.nameLabel.text = "from " + ((Auth.auth().currentUser?.displayName ?? nil)!)
         
     }//ここでviewWillAppear終了
     
@@ -120,14 +128,15 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     //ここからコメント投稿の処理を記載
     @IBAction func handleCommentButton(_ sender: Any) {
-        let commentRef = Firestore.firestore().collection(Const.CommentPath).document()
+        let commentRef = Firestore.firestore().collection(Const.PostPath).document(postId)/*.collection("comments").document()*/
         let commentName = Auth.auth().currentUser?.displayName
         
-        let commentDic = ["postID":postId!, "name": commentName!,"commentText":commentTextField.text!,"date":FieldValue.serverTimestamp() ] as [String : Any]
+        let commentDic = [/*"postID":postId!,*/ "commentName": commentName!,"commentText":commentTextField.text!,/*"commentdate":FieldValue.serverTimestamp() */] as [String : Any]
         
-        commentRef.setData(commentDic)
-        commentTextField.text = ""
-        tableView.reloadData()
+        commentRef.updateData(commentDic)
+        //commentTextField.text = ""
+        //tableView.reloadData()
+        self.dismiss(animated: true, completion: nil)
     }
     
     /*

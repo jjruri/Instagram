@@ -14,7 +14,7 @@ import Firebase
 
 class CommentData: NSObject {
 
-    var postID:String
+    var postID:String!
     var commentID:String
     var commentName:String!
     var commentDate:Date?
@@ -24,7 +24,8 @@ class CommentData: NSObject {
         self.commentID = commentDocument.documentID
         
         let commentDic = commentDocument.data()
-        postID = commentDic["postID"] as! String
+        print("commentDIc:\(commentDic)")
+        postID = commentDic["postID"] as? String
         commentName = commentDic["name"] as? String
         commentText = commentDic["commentText"] as? String
         
