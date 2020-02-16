@@ -24,12 +24,11 @@ class CommentData: NSObject {
         self.commentID = commentDocument.documentID
         
         let commentDic = commentDocument.data()
-        print("commentDIc:\(commentDic)")
         postID = commentDic["postID"] as? String
-        commentName = commentDic["name"] as? String
+        commentName = commentDic["commentName"] as? String
         commentText = commentDic["commentText"] as? String
         
-        let timeStamp = commentDic["date"] as? Timestamp
+        let timeStamp = commentDic["commentdate"] as? Timestamp
         self.commentDate = timeStamp?.dateValue()
     }
     

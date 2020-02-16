@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseUI
 
-class commentViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class commentViewController: UIViewController,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var idCaption: UILabel!
@@ -36,9 +36,10 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.commentTextField.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
-        print("postId:\(String(describing: postId))")
+        print("postId:\(String(describing: postId!))")
         // Do any additional setup after loading the view.
         
         //カスタムtableViewCellを受け入れる部分を記載する
@@ -47,13 +48,12 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
- /*以下はコメントをサブコレクションで実装した場合のコードで今回は使わない
-         けどオリジナルアプリで参考になりそうなので残しておく
+        
         //コメントテーブルの読み込み
-        let commentRef = Firestore.firestore().collection(Const.PostPath).document(postId).collection(Const.CommentPath)
+        let commentRef = Firestore.firestore().collection(Const.PostPath).document(postId!).collection(Const.CommentPath)
         print("commentRef:\(commentRef)")
         
-        listener = commentRef.whereField("postID", isEqualTo: postId).order(by: "date", descending: true).addSnapshotListener(){(commentSnapshot,error) in
+        listener = commentRef.order(by: "commentdate", descending: true).addSnapshotListener(){(commentSnapshot,error) in
             if error != nil {
                 print("コメント読み込みエラー\(error)")
             }
@@ -61,14 +61,14 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
                 print("コメント読み込み開始")
                 self.commentArray = commentSnapshot!.documents.map(){commentDocument in
                     let commentData = CommentData(commentDocument: commentDocument)
-                    print("commentData:\(commentData)")
+                    print("viewWillAppear時点のcommentArray.count:\(self.commentArray.count)")
                     return commentData
                 }
                 print("commentArray.count= \(self.commentArray.count)")
                 self.tableView.reloadData()
             }
         }
-        */
+        
         
         //上部のポストの画像表示
         let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postId + ".jpg")
@@ -101,7 +101,7 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
         
         
         //コメント者の名前を表示
-        self.nameLabel.text = "from " + ((Auth.auth().currentUser?.displayName ?? nil)!)
+        self.nameLabel.text = "comment by " + ((Auth.auth().currentUser?.displayName ?? nil)!)
         
     }//ここでviewWillAppear終了
     
@@ -121,22 +121,34 @@ class commentViewController: UIViewController,UITableViewDataSource,UITableViewD
         
         cell.setCommentViewCell(commentArray[indexPath.row])
         
-            return cell
+        return cell
     }
     
     
     
     //ここからコメント投稿の処理を記載
     @IBAction func handleCommentButton(_ sender: Any) {
-        let commentRef = Firestore.firestore().collection(Const.PostPath).document(postId)/*.collection("comments").document()*/
+        if commentTextField.text != "" {
+        //コメントディレクトリに書き込む
+        let commentRef = Firestore.firestore().collection(Const.PostPath).document(postId).collection(Const.CommentPath).document()
         let commentName = Auth.auth().currentUser?.displayName
         
-        let commentDic = [/*"postID":postId!,*/ "commentName": commentName!,"commentText":commentTextField.text!,/*"commentdate":FieldValue.serverTimestamp() */] as [String : Any]
+        //
+        let commentDic = ["postID":postId!,"commentName": commentName!,"commentText":commentTextField.text!,"commentdate":FieldValue.serverTimestamp() ] as [String : Any]
+        commentRef.setData(commentDic)
         
-        commentRef.updateData(commentDic)
-        //commentTextField.text = ""
-        //tableView.reloadData()
-        self.dismiss(animated: true, completion: nil)
+        //postディレクトリの最新コメント欄を更新
+        let postRef = Firestore.firestore().collection(Const.PostPath).document(self.postId)
+        let recentComment = ["commentName": commentName!,"commentText":commentTextField.text!]
+        
+        postRef.updateData(recentComment)
+        commentTextField.text = ""
+        commentTextField.endEditing(true)
+        commentTextField.resignFirstResponder()
+        tableView.reloadData()
+        //self.dismiss(animated: true, completion: nil)
+    }
+        else{return}
     }
     
     /*

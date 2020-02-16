@@ -37,6 +37,9 @@ class LoginViewController: UIViewController {
                 }
                 print("ログイン成功")
                 SVProgressHUD.dismiss()
+                //self.dismiss(animated: true, completion: nil)
+                //let homeViewController = self.storyboard!.instantiateViewController(withIdentifier: "Home")
+                //self.present(homeViewController, animated: true, completion: nil)
                 self.dismiss(animated: true, completion: nil)
             }
         }

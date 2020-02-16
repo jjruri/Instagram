@@ -30,14 +30,15 @@
                         </constraints>
                         <state key="normal" title="like" image="like_none"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yg2-zT-gfy">
-                        <rect key="frame" x="130" y="484" width="40" height="40"/>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yg2-zT-gfy">
+                        <rect key="frame" x="130" y="484" width="81" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="8zL-eN-bPg"/>
                             <constraint firstAttribute="height" constant="40" id="ofs-bF-u8L"/>
                         </constraints>
-                        <state key="normal" title="comment" image="message" catalog="system">
-                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <state key="normal" image="message" catalog="system">
+                            <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4g1-iz-DJZ">

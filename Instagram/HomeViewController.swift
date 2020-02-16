@@ -36,6 +36,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         print("listener:\(listener)")
         
         if Auth.auth().currentUser != nil{
+            
             if listener == nil{
                 //投稿一覧を取得
                 let postRef = Firestore.firestore().collection(Const.PostPath).order(by: "date", descending: true)
@@ -55,8 +56,10 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
                 
             }
             
+            
         }
         else{
+            //ログインしてないとき
             if listener != nil{
                 // listener登録済みなら削除してpostArrayをクリアする
                 //リスナーがないなら別に通信発生しない
@@ -66,31 +69,14 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
                 self.tableView.reloadData()
             }
         }
-        
-        /*
-         //投稿一覧に表示するために、コメントを一旦全件とってくる（あとでpostID指定する）
-         let commentRef = Firestore.firestore().collectionGroup("comments")
-         commentListener = commentRef.addSnapshotListener(){(commentQuerySnapshot,error) in
-         if let error = error {
-         print("DEBIG PRINT:コメント読み込みエラー\(error)")
-         }
-         else{
-         print("コメント読み込み開始")
-         self.commentArray = commentQuerySnapshot!.documents.map { commentDocument in
-         let commentData = CommentData(commentDocument: commentDocument)
-         print("commentData-potID:\(String(describing: commentData.postID))")
-         return commentData
-         }
-         }
-         //print("DEBUG PRINT:件数取得 \(self.commentData.count)")
-         self.tableView.reloadData()
-         }
-         */
+
     }
     
     
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("セグ数決めの時点でのpostArray:\(postArray.count)")
         return postArray.count
     }
     
